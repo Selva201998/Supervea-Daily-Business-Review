@@ -52,3 +52,10 @@ app = create_application()
 @app.get("/health")
 async def health_check() -> dict[str, str]:
     return {"status": "ok", "project": settings.PROJECT_NAME}
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Supervea Daily Business Review API is running 🚀",
+        "docs": f"{settings.API_V1_STR}/docs"
+    }
