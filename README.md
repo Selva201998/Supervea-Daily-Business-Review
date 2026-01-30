@@ -1,111 +1,106 @@
 # Supervea Daily Business Review
 
-**Supervea Daily Business Review** is an end-to-end executive briefing system designed to provide leadership with a real-time, consolidated view of critical business metrics, workstreams, and risks. 
+**The ultimate minimalist executive briefing system.**
 
-It features a high-performance **FastAPI** backend for deterministic data handling and a modern **Next.js** frontend for a premium user experience.
-
----
-
-## 📸 Snapshot Gallery
-
-### 1. Executive Snapshot
-The landing view provides an immediate, high-level summary of the business health.
-![Executive Snapshot](docs/images/executive_snapshot.png)
-
-### 2. High Impact Workstreams
-Detailed tracking of strategic initiatives, budget impact, and risk status.
-![Workstreams](docs/images/workstreams.png)
-
-### 3. KPI & Goal Pulse
-Real-time monitoring of critical KPIs with trend analysis and status indicators.
-![KPI Pulse](docs/images/kpi_pulse.png)
+Designed to cut through the noise, Supervea delivers a high-impact, one-page daily digest for executives. It consolidates critical KPIs, workstream updates, and action items into a clean, distraction-free interface.
 
 ---
 
-## 🏗️ Architecture
+## 🚀 Live Demo
 
-The system follows a modern client-server architecture:
+Experience the live application deployed on Vercel:
 
-### Backend (Python/FastAPI)
-- **Framework**: FastAPI (Async, Type-safe)
-- **Database**: SQLAlchemy 2.0 (Async) + SQLite (Dev) / PostgreSQL (Prod)
-- **Validation**: Pydantic v2 for strict schema enforcement.
-- **Key Features**:
-    - **Atomic Briefings**: Each briefing is a self-contained, versioned record.
-    - **Strict Typing**: Ensures data consistency across the entire pipeline.
-    - **Scalable**: Ready for serverless deployment (Vercel/AWS Lambda).
-
-### Frontend (TypeScript/Next.js)
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS v4
-- **State**: React Server Components for efficient data fetching.
-- **Design**: Premium, dark-mode first UI with responsive layouts.
-
-### Folder Structure
-```
-Supervea-Daily-Business-Review/
-├── src/                # Backend Application Code
-│   ├── api/            # API Endpoints (Routes)
-│   ├── models.py       # database Tables (SQLAlchemy)
-│   ├── schemas.py      # Pydantic Data Models
-│   ├── main.py         # App Entry Point
-│   └── database.py     # DB Connection Logic
-├── frontend/           # Next.js Web Application
-│   ├── app/            # Pages & Layouts
-│   ├── components/     # UI Components (Snapshot, KPIs, etc.)
-│   └── services/       # API Client Integration
-├── docs/               # Documentation & Assets
-└── requirements.txt    # Python Dependencies
-```
+-   **Frontend Dashboard**: [https://supervea-daily-business-review.vercel.app](https://supervea-daily-business-review.vercel.app)
+-   **Backend API Docs**: [https://supervea-backend.vercel.app/api/v1/docs](https://supervea-backend.vercel.app/api/v1/docs)
 
 ---
 
-## 🚀 Getting Started
+## 📸 Application Screenshots
 
-### Prerequisites
-- **Python 3.11+**
-- **Node.js 18+**
+### 1. The Executive Dashboard
+A beautiful, responsive interface built with **Next.js** and **Tailwind CSS**. It features a "Momentum Close" section to ensure strategic alignment at the start of every day.
 
-### 1. Backend Setup
-Initialize the API server to handle data requests.
+![Executive Dashboard](docs/images/frontend_dashboard.png)
 
+### 2. Interactive API Documentation
+Powered by **FastAPI**, our backend provides automatic, interactive documentation (Swagger UI). This allows developers to test endpoints and manage database content directly from the browser.
+
+![API Documentation](docs/images/backend_docs.png)
+
+---
+
+## 🏗️ Technical Architecture
+
+This project uses a modern, high-performance tech stack optimized for serverless deployment.
+
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Frontend** | **Next.js 14** (App Router) | React framework for production. Server-side rendering ensures fast load times. |
+| **Styling** | **Tailwind CSS** | Utility-first CSS framework for a bespoke, premium design language. |
+| **Backend** | **FastAPI** | High-performance Python framework for building APIs with automatic validation. |
+| **Database** | **Vercel Postgres (Neon)** | Serverless PostgreSQL database for persistent, scalable storage. |
+| **ORM** | **SQLAlchemy + Pydantic** | Robust data modeling and schema validation. |
+| **Deployment** | **Vercel** | Hosted using a "Double Project" strategy (Frontend + Python Backend). |
+
+---
+
+## ✨ Key Features
+
+-   **Executive Snapshot**: A high-level summary of the day's strategic focus.
+-   **High-Impact Workstreams**: Track progress, risks, and ownership of top-priority initiatives.
+-   **KPI Pulse**: Real-time status indicators for critical business metrics.
+-   **Smart Recommendations**: AI-ready structure for suggesting calendar blocks and focus areas.
+-   **Mobile Responsive**: Perfectly readable on iPad, Mobile, and Desktop.
+
+---
+
+## 🛠️ Local Development Setup
+
+If you want to run this project on your own machine:
+
+### 1. Clone the Repository
 ```bash
+git clone https://github.com/Selva201998/Supervea-Daily-Business-Review.git
+cd Supervea-Daily-Business-Review
+```
+
+### 2. Backend Setup (Python)
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 # Install dependencies
 pip install -r requirements.txt
 
-# Start the server (runs on localhost:8000)
+# Run the server
 uvicorn src.main:app --reload
 ```
-*API Docs available at: `http://localhost:8000/docs`*
+*The backend will start at `http://localhost:8000`.*
 
-### 2. Frontend Setup
-Launch the web interface.
-
+### 3. Frontend Setup (Node.js)
 ```bash
 cd frontend
 
-# Install Node modules
+# Install dependencies
 npm install
 
-# Start the dev server (runs on localhost:3000)
+# Run the development server
 npm run dev
 ```
-*Access the app at: `http://localhost:3000`*
+*Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.*
 
 ---
 
-## ☁️ Deployment (Vercel)
+## ☁️ Deployment Guide
 
-This project is optimized for **Vercel** with a "Double Project" setup:
+This project is deployed on **Vercel** using two separate projects connected together:
 
-1.  **Frontend Project**: Deployed from strict `frontend/` root.
-    *   Env: `NEXT_PUBLIC_API_URL` -> URL of Backend Project
-2.  **Backend Project**: Deployed from repo root `.` (Auto-detected Python).
-    *   Env: `DATABASE_URL` -> Postgres Connection String
+1.  **Backend Project**: Deployed as a Python Serverless Function. Connected to **Vercel Storage (Postgres)** for data persistence.
+2.  **Frontend Project**: Deployed as a Next.js Edge application. It connects to the backend via the `NEXT_PUBLIC_API_URL` environment variable.
 
-*Configuration files included: `vercel.json`, `api/index.py`.*
+For detailed deployment steps, please verify the [Deployment Guide](DOCUMENTATION.md).
 
 ---
 
-## 🛡️ License
-Private & Confidential.
+**Developed by Selva**
