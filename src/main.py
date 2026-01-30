@@ -29,6 +29,22 @@ def create_application() -> FastAPI:
         tags=["briefings"]
     )
 
+    from fastapi.middleware.cors import CORSMiddleware
+    
+    # Configure CORS
+    origins = [
+        "http://localhost:3000",
+        "https://supervea-daily-business-review.vercel.app",  # Production frontend
+    ]
+
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"], # For simplicity in this demo, allow all. In prod, use 'origins'
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
     return application
 
 app = create_application()

@@ -1,6 +1,6 @@
 import { DailyExecutiveBriefingProps } from "@/types/briefing";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1";
 
 // Helper to convert snake_case (backend) to camelCase (frontend)
 // Since we used Pydantic with standard config, the API returns snake_case keys.
