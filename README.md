@@ -10,7 +10,7 @@ Designed to cut through the noise, Supervea delivers a high-impact, one-page dai
 
 Experience the live application deployed on Vercel:
 
--   **Frontend Dashboard**: [https://supervea-daily-business-review.vercel.app](https://supervea-daily-business-review.vercel.app)
+-   **Frontend Dashboard**: [https://supervea-daily-business-review.vercel.app](https://supervea-frontend.vercel.app)
 -   **Backend API Docs**: [https://supervea-backend.vercel.app/api/v1/docs](https://supervea-backend.vercel.app/api/v1/docs)
 
 ---
