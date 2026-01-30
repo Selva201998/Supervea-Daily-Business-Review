@@ -15,8 +15,19 @@ class Settings(BaseSettings):
         # Check if running on Vercel without a custom DATABASE_URL
         # Vercel functions are read-only except for /tmp
         import os
-        if os.environ.get("VERCEL") == "1" and "sqlite" in self.DATABASE_URL:
-            # Fallback to tmp directory so the app can start (even if data is ephemeral)
-            self.DATABASE_URL = "sqlite+aiosqlite:////tmp/supervea.db"
+        if os.environ.get("VERCEL") == "1":
+            # 1. Prefer Vercel Postgres (POSTGRES_URL) if available
+            postgres_url = os.environ.get("POSTGRES_URL")
+            if postgres_url:
+                # Driver adjustment: postgres:// -> postgresql+asyncpg:// 
+                if postgres_url.startswith("postgres://"):
+                     postgres_url = postgres_url.replace("postgres://", "postgresql+asyncpg://", 1)
+                elif postgres_url.startswith("postgresql://"):
+                     postgres_url = postgres_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+                self.DATABASE_URL = postgres_url
+            
+            # 2. Fallback to sqlite in /tmp if still using default file path
+            elif "sqlite" in self.DATABASE_URL:
+                self.DATABASE_URL = "sqlite+aiosqlite:////tmp/supervea.db"
 
 settings = Settings()
